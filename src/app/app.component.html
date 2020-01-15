@@ -1,0 +1,77 @@
+
+
+<div *ngIf="identity" class ="navigation col-lg-1"> <!--ngIf condicional de angular. identity esta definido en app.component.ts. Esto quiere decir que si existe identity y tiene algo dentro (esta true) que muestre este div -->
+<h1>
+  {{title}}
+</h1>
+</div>
+
+
+
+<div class="clearfix"></div>
+
+<div *ngIf="identity" class="central col-lg-11">
+  <p>Estas logeado en la aplicacion</p>
+</div>
+
+<div class="col-lg-12" *ngIf="!identity">
+
+  <div class="col-lg-6">
+    <h1>Identificate</h1>
+
+ <form #loginForm="ngForm" (ngSubmit)="onSubmit()"  class="=col-md-10"> <!--   #loginForm="ngForm" con esto indicamos q es un formulario de angular-->
+      <p>
+        <label>Correo electronico</label>
+        <input type="email" #email="ngModel" name="email" [(ngModel)]="user.email"   class="form-control" required /><!--con esto estamos pasando la propiedad email del user, es decir estamos "instanciando" la propiedad email en
+        this.user = new User('','','','','ROLE_USER','');-->
+
+        <span *ngIf="!email.valid && email.touched"> <!--si el email no es valido..-->
+          El email es obligatorio!
+        </span>
+      </p>
+
+      <p>
+        <label>Contraseña</label>
+        <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" class="form-control" required /> <!--con esto estamos pasando la propiedad password del user, es decir estamos "instanciando" la propiedad email en
+        this.user = new User('','','','','ROLE_USER','');-->
+      </p>
+
+      <input type="submit" value="entrar" class="btn-btn-primary">
+
+    </form>
+  </div>
+
+
+<br>
+<!--FORMULARIO DE REGISTRO-->
+  <div class="col-lg-6">
+    <h1>Registrate</h1>
+    <form class>
+      <p>
+        <label>Nombre</label>
+        <input type="text" class="form-control" required />
+      </p>
+
+      <p>
+        <label>Apellidos</label>
+        <input type="password" class="form-control" required />
+      </p>
+
+      <p>
+        <label>Correo electronico</label>
+        <input type="text" class="form-control" required />
+      </p>
+
+      <p>
+        <label>Contraseña</label>
+        <input type="password" class="form-control" required />
+      </p>
+
+      <input type="submit" value="registrar" class="btn-btn-primary">
+
+    </form>
+
+  </div>
+
+
+</div>

@@ -1,0 +1,6 @@
+Luego de probar la instalacion en el servidor local con http://localhost:4200    ...
+-crear los ficheros de modelo para Angular (no confundir con los del backend)
+-crear el fichero tipo app.component.ts (que funciona como una especie de controlador), donde instanciaremos las clases modelo (victor comenzó con instanciar la clase user y la siguó trabajando)
+-en el html respectivo app.component.html escribir el formulario con notacion angular, pasando lo que se recibe por inputs al "controlador" (en nuestro caso app.component.ts), quien los pasará como parámetro al contructor de la clase modelo que está siendo instanciada.
+- crear ficheros con las clases de servicios, (para poder comunicarnos con la api rest, por ejemplo). Con @Inyectable decimos que son clases susceptibles de ser inyectadas por dependencia en otras clases
+-en el "controlador" (en nuestro caso app.component.ts), ejecutamos la inyeccion de dependencias al crearnos una variable perteneciente a la clase inyectable (lo que evita tener que instanciar), con acceso a todos los métodos de esta.

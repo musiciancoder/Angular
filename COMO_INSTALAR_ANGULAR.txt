@@ -1,0 +1,4 @@
+leer https://angular.io/cli
+-Instalar Angular CLI con npm install -g @angular/cli (o bien con npm install -g angular-cli); angular CLI permite comprimir el proyecto para el despiegue en producción en la web
+-Crear el proyecto con ng new nombredelproyecto (o bien sencillamente crear un proyecto de Angular con webstorm)
+-iniciar el proyecto con npm start (desde carpeta del proyecto)
