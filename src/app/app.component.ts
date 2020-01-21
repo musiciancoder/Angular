@@ -73,6 +73,7 @@ export class AppComponent implements OnInit{ // clase app component que se usa p
                 }  else{
                   //crear elemento en el localstorage para tener el token disponible
                   localStorage.setItem('token', token); //el token ya es un string
+                  this.user = new User('','','', '','', 'ROLE_USER',''); //borra los datos en el formulario despues de cada login
                   //console.log(response); //token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZTFmMmRjMGU5OGM0NjJhOWNjZWNjODEiLCJzdXJuYW1lIjoid2FsYmF1bSIsImVtYWlsIjoibGVlQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiaW1hZ2UiOiJudWxsIiwiaWF0IjoxNTc5NDAwNTIxfQ.n5VnFVvn0nltIueFzYNYNT6Tcl3DmIDFlaI5Pa501QY"__proto__: Object
                   console.log(response.token);
                   console.log(response.identity); //undifined
@@ -126,12 +127,13 @@ export class AppComponent implements OnInit{ // clase app component que se usa p
   onSubmitRegister(){
 
     console.log(this.user_register);
+
     this._userService.register(this.user_register).subscribe(
         response  =>{
             let user = response.user; //este es el usuario ya registrado correctamente
             this.user_register = user; //el usuario a registrarse se convierte en usuario registrado
 
-          if(!user.id){
+          if(!user._id){
             this.alertRegister = 'Error al registrarse!';
           }else{
               this.alertRegister = 'El registro se ha realizado correctamente, identificate con ' + this.user_register.email;
