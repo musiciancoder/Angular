@@ -48,8 +48,8 @@ export class UserService {
    //metodo para actualizar usuario
     updateUser(user_to_update){
       let params = JSON.stringify(user_to_update); //pasa a formato JSON el objeto javascript user_to_register;
-      let headers = new Headers({'Content-Type': 'application/json',
-      'Authorization': this.getToken()}); //pasamos el header con este formato porque en el backend tambien tenemos javascript con nodeJS. Ademas pasamos la autorizacion que el usuario debe tener para hacer los cambios
+      let headers = new Headers({'Content-Type': 'application/json', //'Access-Control-Allow-Origin'
+      'authorization': this.getToken()}); //pasamos el header con este formato porque en el backend tambien tenemos javascript con nodeJS. Ademas pasamos la autorizacion que el usuario debe tener para hacer los cambios
 
       return this._http.put(this.url+'update-user/'+user_to_update._id,
         params, {headers: headers}) // ojo, que esto es peticion al servidor y respuesta al mismo tiempo

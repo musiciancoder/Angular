@@ -1,10 +1,13 @@
-<div class="col-lg-6" *ngIf="identity">
+
+
+<div class="col-lg-12" *ngIf="identity">
   <h1>{{titulo}}</h1>
 
   <div *ngIf="alertMessage">  <!--En metodo onsubmit de app.component.ts-->
     <div class="alert alert-info">
       {{alertMessage}}
     </div>
+  </div>
 
 </div>
 
@@ -38,13 +41,13 @@
 
   <div class="image_for_edit" *ngIf="user.image && user.image!='null' ">
 
-    <img src=""/>
+    <img src="{{url + 'get-image-user/' + user.image}}" style="width: 50px;" />
 
   </div>
 
   <p>
     <label>Sube tu foto</label>
-    <input type="file" placeholder="Subir imagen...">
+    <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)">   <!--&lt;!&ndash;(change)="fileChangeEvent($event) esto es de angular, para q ejecute la funcion fileChangeEvent al producirse el evento en el input (el unico evento que puede ocurrir, que es cargar el archivo &ndash;&gt;-->
   </p>
 
 
@@ -54,4 +57,4 @@
 
 </form>
 
-</div>
+

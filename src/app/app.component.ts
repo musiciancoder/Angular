@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from './services/user.service'; // para poder hacer llamadas a la api REST
 import {User} from './models/user';
 import {identity} from 'rxjs/util/identity'; //
+import {GLOBAL} from './services/global';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+
 
 
 @Component({
@@ -11,19 +14,22 @@ import {identity} from 'rxjs/util/identity'; //
 })
 
 export class AppComponent implements OnInit{ // clase app component que se usa para instanciar objetos de los modelos, cuyos argumentos son pasados en su html analogo, en este caso app.component.html
-  public title = 'MUSIFY!';
+  public title = 'MUSIFY!'; //se muestra inmediatamente en app.component html en {{title}}
   public user: User; // aca definimos variable public user que es de tipo User, es decir de la clase models/user
   public user_register:User; //usuario que se esta registrando
   public identity; // para comprobar en el localStorage los datos del usuario logeado. Si esta propiedad esta 'true', es decir esta llena con un objeto (con los datos del usuario), significa q el usuario esta logeado
   public token;
   public errorMessage;
   public alertRegister;
+  public url:string;
 
 
 
   constructor( // la palabra constructor usada en un archivo que no es modelo (o sea en este caso), meramente indica que se va a instanciar, pero no es un constructor en sí. La palabra constructor usada en un archivo de modelo SÍ es un constructor!
-    private  _userService: UserService // definimos variable _userService de tipo UserService en el argumento de este constructor. Esta es una ejecución de inyección de dependencias (parecida a iny de dep por campo de clase en java spring??)
-){
+    private  _userService: UserService, // definimos variable _userService de tipo UserService en el argumento de este constructor. Esta es una ejecución de inyección de dependencias (parecida a iny de dep por campo de clase en java spring??)
+  private _route:ActivatedRoute, //libreria externa
+  private _router: Router, //libreria externa
+  ){
     this.user = new User('','','', '','', 'ROLE_USER',''); // acá instanciamos un User, con las propiedades definidas en el modelo (models/user) y los argumentos que le pasamos son los de los formularios en app.component.html
     this.user_register = new User('','','', '','', 'ROLE_USER',''); // acá instanciamos un User, con las propiedades definidas en el modelo (models/user) y los argumentos que le pasamos son los de los formularios en app.component.html
 
@@ -116,6 +122,7 @@ export class AppComponent implements OnInit{ // clase app component que se usa p
      localStorage.clear(); // elimina lo que esta en el localstorage
     this.identity = null;
     this.token = null;
+    this._router.navigate(['/']); //redireccionamiento a / en url
     //localStorage.clear();
     //this.identity.email=null;
    // this.identity.password=null;

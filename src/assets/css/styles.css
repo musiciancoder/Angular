@@ -1,4 +1,87 @@
-body{
-  color: saddlebrown;
+
+
+.head-title{
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  display: block;
+}
+
+.navigation{
+  text-align: center;
+
 
 }
+
+
+.navigation a{
+  color: #ddd;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  text-decoration:none;
+  text-align: center;
+}
+
+
+
+.navigation a:hover{
+  color: blue;
+  text-decoration: none;
+}
+
+
+
+.navigation .glyphicon{
+  font-size: 25px;
+  display: block;
+  width: 100%;
+}
+
+
+#user_logged{
+
+
+  color: #ddd;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  text-decoration:none;
+  text-align: center;
+}
+
+.btn-logout{
+  cursor: pointer ;
+}
+
+#user_logged .user-image{
+  background: #eee;
+  border-radius: 100px;
+  height: 57px ;
+  width: 57px;
+  margin: 0px auto;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+#user_logged .user-image img{
+  width: 57px;
+}
+
+.btn-logout{
+  cursor:pointer;
+}
+
+.actived{
+  border-bottom: 4px solid greenyellow;
+  padding-bottom: 4px;
+}
+
+
+
+
+
+
+
+
