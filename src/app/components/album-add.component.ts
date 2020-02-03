@@ -4,18 +4,21 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {GLOBAL} from '../services/global';
 import {UserService} from '../services/user.service';
 import {ArtistService} from '../services/artist.service';
+import {AlbumService} from '../services/album.service';
 import {Artist} from '../models/artist';
+import {Album} from '../models/album';
 
 @Component({
-  selector: 'artist-add', //esta es el tag <artist-list>
-  templateUrl: '../views/artist-add.html',
-  providers: [UserService, ArtistService]
+  selector: 'album-add', //esta es el tag <artist-list>
+  templateUrl: '../views/album-add.html',
+  providers: [UserService, ArtistService, AlbumService]
 })
 
 
-export class ArtistAddComponent implements OnInit{
+export class AlbumAddComponent implements OnInit{
   public titulo: string;
   public artist: Artist;
+  public album: Album;
   public identity;
   public token;
   public url: string;
@@ -25,35 +28,39 @@ export class ArtistAddComponent implements OnInit{
     private _route: ActivatedRoute, //libreria externa
     private _router: Router, //libreria externa
     private _userSevice: UserService, //nuestra clase de servicio UserService
-    private _artistService: ArtistService
+    private _artistService: ArtistService,
+    private _albumService: AlbumService
   ){
-    this.titulo = ' Crear nuevo artistas';
+    this.titulo = 'Crear nuevo album';
     this.identity = this._userSevice.getIdentity();
     this.token = this._userSevice.getToken();
     this.url = GLOBAL.url;
-    this.artist = new Artist ('', '','');
+    this.album = new Album ('', '',2017,'','');
 
 
   }
 
-  ngOnInit(){
-    console.log('artist-add.component.ts cargado');
 
+  ngOnInit() {
+    console.log('album-add.component.ts cargado');
 
   }
 
   onSubmit(){
-    console.log(this.artist); //el artista antes de enviar
-   this._artistService.addArtist(this.token, this.artist) //addArtist definida en clase de servicio artist.service. le pasamos identificador de usuario y artista
-      .subscribe(
+    this._route.params.forEach((params: Params)=>{ //rescatamos de url
+      let artist_id = params['artist']; //de todos los parametros saca el parametro artista
+      this.album.artist = artist_id;
+
+      this._albumService.addAlbum(this.token, this.album).subscribe(
+
         response =>{
-          if(!response.artist){
+          if(!response.album){
             this.alertMessage = 'Error en el servidor';
           }else{
-            this.alertMessage = 'El artista se ha creado corrextamente';
-            this.artist = response.artist; //el objeto artist que envia la respuesta del servidor lo transformamos en la propiedad de nuestra clase llamada artist
-            console.log(this.artist); //el artista despues de enviar
-          //this._router.navigate(['/editar-artista', response.artist._id]); //redirigir a esta ruta
+            this.alertMessage = 'El album se ha creado correctamente';
+            this.album = response.album; //el objeto album que envia la respuesta del servidor lo transformamos en la propiedad de nuestra clase llamada album
+
+            this._router.navigate(['/editar-album', response.album._id]); //redirigir a esta ruta
           }
         },
         error =>{
@@ -67,11 +74,14 @@ export class ArtistAddComponent implements OnInit{
           }
         }
 
-      )
+
+      );
+
+
+
+
+
+    });
+
   }
-
 }
-
-
-
-
